@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+ <h1 class="text-center">Dashboard</h1>
+ <p class="text-end col-12"><a class="btn btn-dark" href="{% url "edit" %}">edit profile</a>  <a class="btn btn-dark" href="{% url "password_change" %}">change password</a>.</p> </p>
+<hr>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-12">
+                <div class="card appointment">
+                    <div class="card-header">
+                        <h1>
+                            Next Appointment
+                        </h1>
+                    </div>
+                    <div class="card-body ">
+                        <h3 >
+                            {{user.profile.next_appointment}}
+                        </h3>
+                    </div>
+                    <div><h1>Last checked On</h1></div>
+                    <div>
+                        <h3>{{user.profile.last_appointment}}</h3>
+                    </div>
+                    <div>
+                        <h1>Doctors Orders</h1>
+                    </div>
+                    <div>
+                        {{user.profile.orders}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <div class="card-header ">
+                        <h1>
+                            Essential Data
+                        </h1>
+                        <div class="card-body ">
+                            <table class="table table-striped">
+                                <tr>
+                                    <td colspan="2">
+                                        <img src=" {{user.profile.photo.url}}" class="photo"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Name
+                                    </td>
+                                    <td>
+                                        {{ user.first_name }}  {{ user.last_name }} 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Blood Type
+                                    </td>
+                                    <td>
+                                        {{ user.profile.blood_type}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Height
+                                    </td>
+                                    <td>
+                                       {{ user.profile.height}}
+                                    </td>
+                                </tr>
+                                    <tr>
+                                        <td>
+                                            Weight
+                                        </td>
+                                        <td>
+                                            {{ user.profile.weight}}kg
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Medication
+                                        </td>
+                                        <td>
+                                            <ul>
+                                                <li> Panadol</li>
+                                                <li> Amoxacilin</li>
+                                                <li> Penicillin</li>
+                                            </ul>
+                                        </td>
+                                    </tr> 
+                                    <tr>
+                                        <td>
+                                            Emergency Contact
+                                        </td>
+                                        <td>
+                                             <p>{{ user.profile.emergency_contact}}</p>
+                                             <p>
+                                                {{ user.profile.emergency_contact_number}}</p>
+                                        </td>
+                                    </tr>    
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="card col-md-6 col-sm-12">
+                <div class="card-body">
+                    <h6>Address</h6>
+                    <div>Megenagna</div>
+                    <h6>Telephone</h6>
+                    <div>{{user.profile.phone_number}}</div>
+                </div>
+            </div>
+    
+            <div class="card col-md-6 col-sm-12">
+                <div class="card-body">
+                    <h6>Card Number</h6>
+                    <div>YM-020839</div>
+                    <h6>Client Since</h6>
+                    <div>April 21, 2023</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+ {% endblock %}

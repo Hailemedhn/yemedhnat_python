@@ -1,0 +1,81 @@
+
+{% extends "base.html" %}
+
+{% block title %}Yemedhnat{% endblock %}
+
+{% block content %}
+
+    <main>
+        <div> 
+            <ul class="text-center">
+                {% for item in symptoms %}
+                <li class= "btn d-block btn-dark m-2 b-1  "> 
+                    {{item.name}}
+                 </li>
+                {% endfor %}
+                <form action="" method="POST" id="form">
+                    <button type="button" id="btn">Submit</button>
+                </form>
+            </ul>
+        </div>
+    </main>
+    <script type="text/javascript">
+        const lis = document.getElementsByTagName("li");
+        const button = document.getElementById("btn")
+        for(let i=0; i< lis.length; i++){
+            lis[i].addEventListener("click", handleClick);
+        }
+        function handleClick(e){
+            if(e.target.classList.contains("btn-dark")){
+                e.target.classList.remove("btn-dark");
+                e.target.classList.add("btn-light");
+            }else if(e.target.classList.contains("btn-light")){
+                e.target.classList.remove("btn-light");
+                e.target.classList.add("btn-dark");
+            }
+        }
+        
+
+        const csrftoken = getCookie('csrftoken');
+        btn.addEventListener("click",(e)=>{
+
+            const url = '/diagnosis/test/';
+            const data = {
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            };
+
+            fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken 
+            },
+            body: JSON.stringify(data)
+            })
+            .then(response => 
+                response.json())
+            .then(data => {
+            console.log('Response:', data);
+            }) 
+            .catch(error =>{
+            console.error('Fetch error:', error);
+});
+        })
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+    </script>
+{% endblock %}
